@@ -1,0 +1,440 @@
+// Google Fonts
+@import url('https://fonts.googleapis.com/css?family=Open+Sans:400,700&subset=vietnamese');
+@import url('visibility.css');
+
+// Mixin
+
+@import "breakpoint";
+
+// Styling Variables
+
+$container-width: 1140px;
+
+$colors: (
+    primary: #d50f25,
+    accent: #d50f25,
+    text: #292929,
+    grid: #eee
+);
+
+@function color($color-name) {
+    @return map-get($colors, $color-name);
+}
+
+$font-primary: 'Open Sans', sans-serif;
+
+// Styles
+
+* {
+    box-sizing: border-box;
+    z-index: 1;
+    position: relative;
+    color: darken($color: #980102, $amount: 40)
+}
+
+body {
+    font: {
+        family: $font-primary;
+        size: .9rem;
+    }
+    background: {
+        color: white;
+        size: cover;
+    }
+    color: color(text);
+    @include breakpoint(sm){
+        font: {
+            size: .8rem;
+        }
+    }
+}
+
+a {
+    text-decoration: inherit;
+    color: inherit;
+    position: relative;
+    &:after {
+        content: '';
+        display: block;
+        background: currentColor;
+        position: absolute;
+        left: 0;
+        width: 0%;
+        height: .1em;
+        margin-top: 0.3rem;
+        transition: .25s all ease;
+        opacity: 0;
+    }
+    &:hover:after {
+        opacity: 1;
+        width: 100%;
+        transition: .25s all ease;
+    }
+}
+
+p {
+    line-height: 1.5;
+}
+
+.hai-background-grids {
+    position: fixed;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 100%;
+    max-width: $container-width;
+    height: 100%;
+    margin: 0 auto;
+    z-index: 0;
+    display: flex;
+    .hai-background-grid {
+        border: .5px solid color(grid);
+        width: 100%;
+        height: 100%;
+        &:first-of-type {
+            border-left-width: 1px;
+        }
+        &:last-of-type {
+            border-right-width: 1px;
+        }
+    }
+}
+
+.container-fluid {
+    padding: {
+        right: 5vw;
+        left: 5vw;
+    }
+}
+
+#header {
+    margin: 1rem auto;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    .logo {
+        display: flex;
+        align-items: flex-start;
+        justify-content: center;
+        flex-direction: column;
+        cursor: pointer;
+        h1 {
+            margin: 0;
+        }
+        p {
+            margin: 0;
+            color: lighten($color: color(text), $amount: 50);
+            @include breakpoint(sm){
+                margin-left: 1rem;
+            }
+        }
+        @include breakpoint(sm){
+            align-items: center;
+            flex-direction: row;
+        }
+    }
+    ul {
+        list-style: none;
+        li {
+            display: block;
+            text-align: right;
+            text-transform: lowercase;
+            margin: 0 10px;
+            color: lighten($color: color(text), $amount: 50);
+            @include breakpoint(sm){
+                display: inline;
+            }
+            a {
+                &.active {
+                    color: color(text);
+                }
+            }
+        }
+    }
+    @include breakpoint(sm){
+        margin: 2rem auto;
+    }
+}
+
+#main {
+    position: relative;
+}
+
+.page-featured {
+    height: 25vh;
+    background: {
+        color: #ddd;
+        position: center center;
+        size: cover;
+    }
+    @include breakpoint(sm){
+        height: 50vh;
+    }
+    &.page-about {
+        background-image: url('../images/about.jpg');
+    }
+}
+
+.about-items {
+    margin-top: 3rem;
+}
+
+.about-item {
+    h4 {
+        margin-top: 2rem;
+        margin-bottom: 1.5rem;
+        text-transform: uppercase;
+        letter-spacing: .2em;
+        font-size: .8em;
+    }
+    p {
+        margin: 0;
+    }
+    ul {
+        list-style: none;
+        margin: 0;
+        padding: 0;
+        li {
+            margin-bottom: 1rem;
+            white-space: nowrap;
+            p {
+                &:nth-child(2) {
+                    color: lighten($color: color(text), $amount: 50);
+                }
+            }
+        }
+    }
+    &.bio {
+        p {
+            margin-bottom: .75rem;
+            text-align: justify;
+        }
+    }
+    &.services {
+        ul {
+            li {
+                display: inline-block;
+                width: 35%;
+                text-transform: lowercase;
+                white-space: nowrap;
+                &:hover {
+                    color: color(text);
+                }
+            }
+        }
+    }
+    &.clients {
+        ul {
+            li {
+                display: inline-block;
+                margin-right: .5em;
+                text-transform: lowercase;
+                white-space: nowrap;
+                @include breakpoint(md){
+                    margin-right: 1em;
+                }
+            }
+        }
+    }
+    &.links {
+        p {
+            display: inline-block;
+            width: 35%;
+            margin-bottom: .75rem;
+        }
+    }
+    &.contacts {
+        p {
+            margin-bottom: .75rem;
+            span {
+                color: lighten($color: color(text), $amount: 50);
+                margin-left: .5em;
+                transition: .25s all ease;
+            }
+        }
+        @include breakpoint(md) {
+            p {
+                span {
+                    font-size: .8em;
+                    opacity: 0;
+                    transition: .25s all ease;
+                }
+                &:hover {
+                    span {
+                        opacity: 1;
+                        transition: .25s all ease;
+                    }
+                }
+            } 
+        }
+    }
+}
+
+
+#footer {
+    margin: 1rem auto;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    text-transform: lowercase;
+    @include breakpoint(sm){
+        margin: 2rem auto;
+    }    
+}
+
+// Homepage: Portfolio Gallery
+
+.portfolio-item {
+    width: 100%;
+    height: 50vh;
+    display: flex;
+    background: {
+        color: #ddd;
+        size: cover;
+        position: center;
+    }
+    margin-bottom: 5vw;
+    transition: all .5s ease-in-out;
+    a {
+        width: 100%;
+        height: 100%;
+        background: {
+            color: rgba(255, 255, 255, 0);
+        }
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        justify-content: flex-end;
+        span {
+            background: {
+                color: white;
+            }
+            padding: .5em;
+            margin: 1em;
+            text-transform: lowercase;
+            &:nth-child(2) {
+                display: none;
+            }
+        }
+        &::after {
+            display: none;
+        }
+    }
+    @include breakpoint(md){
+        margin-bottom: 30px;
+        a {
+            width: 100%;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+            background: {
+                color: rgba(255, 255, 255, 1);
+            }
+            font-size: 5rem;
+            border: 1px solid color(grid);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            transition: all .5s ease;
+            span {
+                background: transparent;
+                margin: 0;
+                padding: 0;
+                &:nth-child(2) {
+                    display: block;
+                    font-size: .75rem;
+                    margin-top: .75rem;
+                    text-transform: uppercase;
+                }
+            }
+        }
+        &:hover {
+            a {
+                opacity: 1;
+                transition: all .5s ease;
+            }
+        }
+    }
+    &.precious {
+        background-image: url(../images/home--featured/precious.jpg);
+    }
+    &.thom-phet {
+        background-image: url(../images/home--featured/thom-phet.jpg);
+    }
+    &.dan-truyen {
+        background-image: url(../images/home--featured/dan-truyen.jpg);
+    }
+}
+
+// Laboratory
+
+ul.file-tree{
+    margin: 0 0 0 2em;
+    list-style: none; line-height: 2em; font-family: Arial;
+    padding: 0;
+    li{
+        position: relative;
+        &:before{
+            position: absolute;
+            left: -15px;
+            top: 0px;
+            content: '';
+            display: block;
+            border-left: 1px solid #ddd;
+            height: 1em;
+            border-bottom: 1px solid #ddd;
+            width: 10px;
+        }
+
+        &:after{
+            position: absolute;
+            left: -15px;
+            bottom: -7px;
+            content: '';
+            display: block;
+            border-left: 1px solid #ddd;
+            height: 100%;
+        }
+        
+      &.root{
+          margin: 0px 0px 0px -20px;
+          &:before{
+            display: none;
+          }
+
+          &:after{
+            display: none;
+          }
+
+
+       }
+
+
+       &:last-child{
+          &:after{ display: none }
+        }
+    }
+}
+
+// Works
+
+.page-works-item {
+    img {
+        width: 100%;
+        &.full-width {
+            margin-left: -5vw;
+            margin-right: -5vw;
+            width: calc(100% + 10vw);
+        }
+    }
+    .images-stack {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+}
+
+
